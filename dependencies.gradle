@@ -1,0 +1,90 @@
+def deps = [:]
+deps.android_material = "com.google.android.material:material:${versions.android_material}"
+deps.android_play_core = "com.google.android.play:core:${versions.android_play_core}"
+deps.android_work = "androidx.work:work-runtime-ktx:${versions.work_version}"
+deps.androidx_appcompat = "androidx.appcompat:appcompat:${versions.androidx_appcompat}"
+
+deps.androidx_cardview = "androidx.cardview:cardview:${versions.androidx_cardview}"
+deps.androidx_constraintlayout = "androidx.constraintlayout:constraintlayout:${versions.androidx_constraintlayout}"
+deps.androidx_core = [
+        "androidx.core:core:${versions.androidx_core}",
+        "androidx.core:core-ktx:${versions.androidx_core}"
+]
+deps.androidx_dynamicanimation = "androidx.dynamicanimation:dynamicanimation:${versions.androidx_dynamicanimation}"
+deps.androidx_fragment = [
+        "androidx.fragment:fragment:${versions.fragment}",
+        "androidx.fragment:fragment-ktx:${versions.fragment}"
+]
+
+deps.androidx_lifecycle = [
+        "androidx.lifecycle:lifecycle-runtime:${versions.androidx_lifecycle}",
+        "androidx.lifecycle:lifecycle-runtime-ktx:${versions.androidx_lifecycle}",
+        "androidx.lifecycle:lifecycle-process:${versions.androidx_lifecycle}",
+        "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidx_lifecycle}",
+        "androidx.lifecycle:lifecycle-livedata-ktx:${versions.androidx_lifecycle}",
+        "androidx.lifecycle:lifecycle-process:${versions.androidx_lifecycle}",
+        "androidx.lifecycle:lifecycle-service:${versions.androidx_lifecycle}"
+]
+deps.androidx_lifecycle_commmon = "androidx.lifecycle:lifecycle-common-java8:${versions.androidx_lifecycle}"
+
+deps.androidx_multidex = "androidx.multidex:multidex:${versions.androidx_multidex}"
+
+deps.androidx_preference = "androidx.preference:preference:${versions.androidx_preference}"
+deps.androidx_startup = "androidx.startup:startup-runtime:${versions.androidx_startup}"
+deps.androidx_transition = "androidx.transition:transition:${versions.androidx_transition}"
+deps.androidx_viewpager2 = "androidx.viewpager2:viewpager2:${versions.androidx_viewpager2}"
+
+deps.butterknife = "com.jakewharton:butterknife:${versions.butterknife}"
+deps.butterknife_compiler = "com.jakewharton:butterknife-compiler:${versions.butterknife}"
+deps.coroutines = [
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:${versions.coroutines}"
+]
+deps.coroutines_play_services = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${versions.coroutines_play_services}"
+deps.glide = "com.github.bumptech.glide:glide:${versions.glide}"
+deps.glide_okhttp3 = "com.github.bumptech.glide:okhttp3-integration:${versions.glide}"
+deps.glide_compiler = "com.github.bumptech.glide:compiler:${versions.glide}"
+deps.groupie = [
+        "com.github.lisawray.groupie:groupie:${versions.groupie}",
+        "com.github.lisawray.groupie:groupie-databinding:${versions.groupie}",
+        "com.github.lisawray.groupie:groupie-viewbinding:${versions.groupie}"
+]
+deps.gson = "com.google.code.gson:gson:${versions.gson}"
+deps.hilt_android = "com.google.dagger:hilt-android:${versions.hilt}"
+deps.hilt_compiler = "com.google.dagger:hilt-compiler:${versions.hilt}"
+deps.httpclient_android = "org.apache.httpcomponents:httpclient-android:${versions.httpclient_android}"
+deps.junit = "junit:junit:${versions.junit}"
+deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin_version}"
+deps.kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${versions.kotlin_version}"
+deps.lottie = "com.airbnb.android:lottie:${versions.lottie}"
+deps.moshi = "com.squareup.moshi:moshi-kotlin:${versions.moshi}"
+deps.moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}"
+deps.okio = "com.squareup.okio:okio:${versions.okio}"
+deps.retrofit = [
+        "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+        "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
+        "com.squareup.okhttp3:logging-interceptor:${versions.logginginterceptor}",
+        "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
+]
+deps.retrofit_converter = [
+        "com.squareup.retrofit2:converter-simplexml:${versions.retrofit}",
+        "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+        "com.squareup.retrofit2:converter-scalars:${versions.retrofit}",
+        "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+]
+deps.room = [
+        "androidx.room:room-runtime:${versions.room}",
+        "androidx.room:room-ktx:${versions.room}"
+]
+deps.room_compiler = "androidx.room:room-compiler:${versions.room}"
+
+deps.rx = [
+        "io.reactivex.rxjava2:rxjava:${versions.rxjava}",
+        "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}",
+        "io.reactivex.rxjava2:rxkotlin:${versions.rxkotlin}"
+]
+
+deps.threetenabp = "com.jakewharton.threetenabp:threetenabp:${versions.threetenabp}"
+deps.timber = "com.jakewharton.timber:timber:${versions.timber}"
+ext.deps = deps
