@@ -31,6 +31,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -70,9 +75,7 @@ dependencies {
     kapt deps.hilt_compiler
 
     implementation deps.glide
-    implementation (deps.glide_okhttp3) {
-        exclude module: 'okhttp'
-    }
+    implementation deps.glide_okhttp3
     annotationProcessor deps.glide_compiler
     kapt deps.glide_compiler
 

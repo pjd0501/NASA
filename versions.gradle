@@ -42,4 +42,5 @@ versions.rxandroid = "2.1.1"
 versions.rxjava = "2.2.20"
 versions.rxkotlin = "2.4.0"
 versions.threetenabp = "1.3.0"
+versions.timber="5.0.1"
 ext.versions = versions
