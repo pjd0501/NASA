@@ -12,6 +12,7 @@ import com.obvious.nasaapod.R
 import com.obvious.nasaapod.databinding.ItemImageDetailBinding
 import com.obvious.nasaapod.home.data.ImageDto
 import com.xwray.groupie.viewbinding.BindableItem
+import org.threeten.bp.format.DateTimeFormatter
 
 class ImageDetailItem(
     private val imageData: ImageDto?,
@@ -37,11 +38,23 @@ class ImageDetailItem(
 
         viewBinding.description.text = imageData?.explanation ?: ""
         viewBinding.copyright.text = imageData?.copyright ?: ""
-        viewBinding.date.text = imageData?.date ?: ""
+        viewBinding.date.text = getFormattedDate()
 
     }
 
     override fun initializeViewBinding(view: View): ItemImageDetailBinding {
         return ItemImageDetailBinding.bind(view)
+    }
+
+    private fun getFormattedDate() : String {
+        try {
+            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val parsedDate = dateTimeFormatter.parse(imageData?.date)
+            return DateTimeFormatter.ofPattern("dd MMM yyyy").format(parsedDate)
+        }
+        // catching generic exception since app should not crash if the date is not in the correct format from upstream
+        catch (ex: Exception) {
+            return ""
+        }
     }
 }
