@@ -27,6 +27,8 @@ class HomeFragment : Fragment() {
     private var _homeLayoutBinding: FragmentHomeBinding? = null
     private val homeLayoutBinding get() = _homeLayoutBinding!!
 
+    private var sortedImagesList: List<ImageDto> = mutableListOf()
+
     private val homeViewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(Dispatchers.Default)
     }
@@ -83,6 +85,8 @@ class HomeFragment : Fragment() {
             val data = requireContext().assets.readFile("data.json")
 
             homeViewModel.getImages(data).observe(viewLifecycleOwner, { imageList ->
+                sortedImagesList = imageList ?: mutableListOf()
+                groupAdapter.clear()
                 imageList?.forEach {
                     groupAdapter.add(ImageItem(requireContext(), it))
                 }

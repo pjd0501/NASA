@@ -30,7 +30,6 @@ class ImageItem(
             .load(getImageUrl())
             .placeholder(ColorDrawable(Color.GRAY))
             .downsample(DownsampleStrategy.CENTER_INSIDE)
-            .skipMemoryCache(true)
             .transition(DrawableTransitionOptions.withCrossFade())
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .into(viewBinding.titleImage)
