@@ -8,7 +8,6 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineExceptionHandler
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -17,19 +16,23 @@ class HomeViewModel(private val dispatcher: CoroutineDispatcher) :
     ViewModel() {
 
     fun getImages(inputData: String) =
-        liveData(dispatcher + CoroutineExceptionHandler { coroutineContext, throwable -> throwable.printStackTrace() }) {
-            val moshi = Moshi.Builder().build()
-            val type = Types.newParameterizedType(List::class.java, ImageDto::class.java)
-            val jsonAdapter: JsonAdapter<List<ImageDto>> = moshi.adapter(type)
+        liveData(dispatcher) {
+            try {
+                val moshi = Moshi.Builder().build()
+                val type = Types.newParameterizedType(List::class.java, ImageDto::class.java)
+                val jsonAdapter: JsonAdapter<List<ImageDto>> = moshi.adapter(type)
 
-            val jsonData = jsonAdapter.fromJson(inputData)
+                val jsonData = jsonAdapter.fromJson(inputData)
 
-            // sort the data by latest date.
-            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val sortedImagesList = jsonData?.sortedByDescending {
-                LocalDate.parse(it.date, dateTimeFormatter)
+                // sort the data by latest date.
+                val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val sortedImagesList = jsonData?.sortedByDescending {
+                    LocalDate.parse(it.date, dateTimeFormatter)
+                }
+                emit(sortedImagesList)
+            } catch (ex: Exception) {
+                emit(listOf())
             }
-            emit(sortedImagesList)
         }
 }
 
