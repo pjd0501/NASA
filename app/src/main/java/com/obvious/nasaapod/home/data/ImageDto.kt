@@ -1,8 +1,15 @@
 package com.obvious.nasaapod.home.data
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+/**
+ * Encapsulates metadata for each image
+ */
+
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class ImageDto(
     @Json(name = "copyright")
@@ -28,5 +35,5 @@ data class ImageDto(
 
     @Json(name = "url")
     val url: String?,
-)
+) : Parcelable
 
