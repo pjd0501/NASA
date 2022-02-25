@@ -14,6 +14,10 @@ import com.obvious.nasaapod.home.data.ImageDto
 import com.xwray.groupie.viewbinding.BindableItem
 import org.threeten.bp.format.DateTimeFormatter
 
+/**
+ * An individual image [BindableItem] to display a content in [DetailFragment]
+ */
+
 class ImageDetailItem(
     private val imageData: ImageDto?,
     private val context: Context

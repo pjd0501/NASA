@@ -13,6 +13,10 @@ import com.obvious.nasaapod.databinding.ItemImageBinding
 import com.obvious.nasaapod.home.data.ImageDto
 import com.xwray.groupie.viewbinding.BindableItem
 
+/**
+ *  [BindableItem] to display a images in [HomeFragment].
+ */
+
 class ImageItem(
     private val context: Context,
     private val imageDto: ImageDto
