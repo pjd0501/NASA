@@ -21,6 +21,7 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -38,7 +39,6 @@ class HomeFragment : Fragment() {
     private val onItemClickListener: OnItemClickListener by lazy {
         OnItemClickListener { item, view ->
             if (item is ImageItem) {
-
                 val position = groupAdapter.getAdapterPosition(item)
 
                 if (position == RecyclerView.NO_POSITION) {
@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _homeLayoutBinding = FragmentHomeBinding.inflate(inflater, container, false)
+        homeLayoutBinding.toolbar.title = resources.getString(R.string.home)
         return homeLayoutBinding.root
     }
 
@@ -66,6 +67,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showProgress()
         groupAdapter.apply {
             setOnItemClickListener(onItemClickListener)
             //spanCount = 2
@@ -81,18 +83,27 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Default) {
             val data = requireContext().assets.readFile("data.json")
-
-            homeViewModel.getImages(data).observe(viewLifecycleOwner, { imageList ->
-                sortedImagesList = imageList ?: mutableListOf()
-                groupAdapter.clear()
-                imageList?.forEach {
-                    groupAdapter.add(ImageItem(requireContext(), it))
-                }
-            })
-
+            withContext(Dispatchers.Main) {
+                homeViewModel.getImages(data).observe(viewLifecycleOwner, { imageList ->
+                    hideProgress()
+                    sortedImagesList = imageList ?: listOf()
+                    groupAdapter.clear()
+                    imageList?.forEach {
+                        groupAdapter.add(ImageItem(requireContext(), it))
+                    }
+                })
+            }
         }
+    }
+
+    private fun showProgress() {
+        homeLayoutBinding.loadingProgress.visibility = View.VISIBLE
+    }
+
+    private fun hideProgress() {
+        homeLayoutBinding.loadingProgress.visibility = View.GONE
     }
 
     override fun onDestroyView() {
