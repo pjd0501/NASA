@@ -9,16 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.obvious.nasaapod.R
 import com.obvious.nasaapod.databinding.FragmentHomeBinding
+import com.obvious.nasaapod.detail.view.DetailFragment
 import com.obvious.nasaapod.ext.readFile
 import com.obvious.nasaapod.home.HomeViewModel
 import com.obvious.nasaapod.home.HomeViewModelFactory
+import com.obvious.nasaapod.home.data.ImageDto
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class HomeFragment : Fragment() {
 
@@ -35,13 +37,18 @@ class HomeFragment : Fragment() {
         OnItemClickListener { item, view ->
             if (item is ImageItem) {
 
-                //TODO: Add navigation to detail fragment
+                val position = groupAdapter.getAdapterPosition(item)
+
+                if (position == RecyclerView.NO_POSITION) {
+                    return@OnItemClickListener
+                }
+
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.container, DetailFragment.newInstance(sortedImagesList, position))
+                    .addToBackStack(null)
+                    .commit()
             }
         }
-    }
-
-    init {
-        Timber.plant(Timber.DebugTree())
     }
 
     override fun onCreateView(
