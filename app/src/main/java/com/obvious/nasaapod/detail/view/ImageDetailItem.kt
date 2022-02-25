@@ -33,6 +33,12 @@ class ImageDetailItem(
             .transition(DrawableTransitionOptions.withCrossFade())
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .into(viewBinding.imageView)
+
+
+        viewBinding.description.text = imageData?.explanation ?: ""
+        viewBinding.copyright.text = imageData?.copyright ?: ""
+        viewBinding.date.text = imageData?.date ?: ""
+
     }
 
     override fun initializeViewBinding(view: View): ItemImageDetailBinding {

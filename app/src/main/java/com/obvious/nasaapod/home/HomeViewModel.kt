@@ -18,7 +18,6 @@ class HomeViewModel(private val dispatcher: CoroutineDispatcher) :
 
     fun getImages(inputData: String) =
         liveData(dispatcher + CoroutineExceptionHandler { coroutineContext, throwable -> throwable.printStackTrace() }) {
-
             val moshi = Moshi.Builder().build()
             val type = Types.newParameterizedType(List::class.java, ImageDto::class.java)
             val jsonAdapter: JsonAdapter<List<ImageDto>> = moshi.adapter(type)
