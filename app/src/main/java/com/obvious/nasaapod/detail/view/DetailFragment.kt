@@ -32,6 +32,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _detailLayoutBinding = FragmentImageDetailBinding.inflate(inflater, container, false)
+        setupToolbar()
         return detailLayoutBinding.root
     }
 
@@ -56,7 +57,10 @@ class DetailFragment : Fragment() {
 
     private fun setupToolbar() {
         detailLayoutBinding.toolbar.apply {
-            //navigationIcon =
+            setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material)
+            setNavigationOnClickListener {
+                parentFragmentManager.popBackStack()
+            }
         }
     }
 

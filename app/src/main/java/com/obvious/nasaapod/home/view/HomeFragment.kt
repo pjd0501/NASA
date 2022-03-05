@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +38,7 @@ class HomeFragment : Fragment() {
     private val groupAdapter: GroupAdapter<GroupieViewHolder> = GroupAdapter()
 
     private val onItemClickListener: OnItemClickListener by lazy {
-        OnItemClickListener { item, view ->
+        OnItemClickListener { item, _ ->
             if (item is ImageItem) {
                 val position = groupAdapter.getAdapterPosition(item)
 
@@ -45,10 +46,7 @@ class HomeFragment : Fragment() {
                     return@OnItemClickListener
                 }
 
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.container, DetailFragment.newInstance(sortedImagesList, position))
-                    .addToBackStack(null)
-                    .commit()
+                navigateToDetailScreen(position)
             }
         }
     }
@@ -95,6 +93,14 @@ class HomeFragment : Fragment() {
                     }
                 })
             }
+        }
+    }
+
+    private fun navigateToDetailScreen(position: Int) {
+        parentFragmentManager.commit {
+            setCustomAnimations(R.anim.slide_in, R.anim.fade_out)
+            replace(R.id.container, DetailFragment.newInstance(sortedImagesList, position))
+            addToBackStack(null)
         }
     }
 
