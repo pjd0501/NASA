@@ -40,9 +40,6 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-
     // Fragments, Java, Kotlin and testing artifacts
     implementation deps.androidx_appcompat
     implementation deps.androidx_cardview
@@ -50,10 +47,6 @@ dependencies {
     implementation deps.androidx_core
     implementation deps.androidx_dynamicanimation
     implementation deps.androidx_fragment
-    implementation deps.androidx_multidex
-    implementation deps.androidx_preference
-    implementation deps.androidx_startup
-    implementation deps.androidx_transition
     implementation deps.androidx_viewpager2
 
     // lifecycles, livedata, viewmodel
@@ -62,59 +55,29 @@ dependencies {
     kapt deps.androidx_lifecycle_commmon
     implementation deps.android_material
 
-    implementation deps.butterknife
-    annotationProcessor deps.butterknife_compiler
-    kapt deps.butterknife_compiler
-
     // Kotlin Coroutines
     implementation deps.coroutines
     implementation deps.coroutines_play_services
 
-    // Dependency injection
-    implementation deps.hilt_android
-    kapt deps.hilt_compiler
-
     implementation deps.glide
     implementation deps.glide_okhttp3
-    annotationProcessor deps.glide_compiler
     kapt deps.glide_compiler
 
     implementation deps.groupie
-
-    implementation deps.lottie
 
     // Moshi
     implementation deps.moshi
     kapt deps.moshi_codegen
 
-    implementation deps.okio
-
-    // okhttp, retrofit
-    deps.retrofit.each {
-        implementation ("${it}") {
-            exclude module: 'okhttp'
-        }
-    }
-
-    deps.retrofit_converter.each {
-        implementation ("${it}") {
-            exclude module: 'stax-api'
-            exclude module: 'stax'
-            exclude module: 'xpp3'
-            exclude module: 'okhttp'
-        }
-    }
-
-    // Room
-    implementation deps.room
-    kapt deps.room_compiler
-
-    implementation deps.rx
-
     implementation deps.threetenabp
     implementation deps.timber
 
     testImplementation deps.junit
+    testImplementation deps.mockk
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
